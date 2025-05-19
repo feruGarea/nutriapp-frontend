@@ -38,14 +38,6 @@ useEffect(() => {
   fetchReport();
 }, []);
 
-
-
-export default function DashboardScreen() {
-  const [report, setReport] = useState([]);
-  const [usuarios, setUsuarios] = useState([]);
-
-  
-
   return (
     
       
