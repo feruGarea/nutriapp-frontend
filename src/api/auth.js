@@ -1,5 +1,4 @@
 const BASE_URL = 'https://nutriapp-backend-vou4.onrender.com/api';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 export async function fetchUsuarios() {
@@ -23,13 +22,15 @@ export async function loginUser(mail, contraseña) {
 
 
 export async function registerUser(nombre, mail, contraseña) {
-  
-  const result = await registerUser(nombre, mail, contraseña);
-  if (result?.token) {
-  await AsyncStorage.setItem('userToken', result.token);
-  navigation.replace('Main'); // o Dashboard
-} else {
-  alert('Registro fallido');
-}
- 
+  try {
+    const res = await fetch(`${BASE_URL}/auth/register`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nombre, mail, contraseña }),
+    });
+    return await res.json();
+  } catch (err) {
+    console.error('Error en registro:', err);
+    return null;
+  }
 }

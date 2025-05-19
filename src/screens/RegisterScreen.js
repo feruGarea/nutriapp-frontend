@@ -11,12 +11,12 @@ export default function RegisterScreen({ navigation }) {
 
 const handleRegister = async () => {
   const result = await registerUser(nombre, mail, contraseña);
+
   if (result?.token) {
-    // guardar token, redirigir a Main
     await AsyncStorage.setItem('userToken', result.token);
     navigation.replace('Main');
   } else {
-    alert('Error al registrarse');
+    alert('Registro fallido');
   }
 };
 
