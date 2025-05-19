@@ -5,7 +5,7 @@ export default function MealsScreen({ navigation }) {
   const [meals, setMeals] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:192.168.0.122/api/comidas')
+    fetch('https://nutriapp-backend.onrender.com/api/comidas')
       .then(res => res.json())
       .then(setMeals)
       .catch(console.error);

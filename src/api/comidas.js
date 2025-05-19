@@ -1,6 +1,7 @@
-const BASE_URL = 'https://staging.nutriapp.com/api';
+const BASE_URL = 'https://nutriapp-backend-vou4.onrender.com/api/comidas';
 
-export async function getMeals(token) {
+
+export async function getComidas(token) {
   try {
     const res = await fetch(`${BASE_URL}/meals`, {
       headers: {
@@ -15,7 +16,7 @@ export async function getMeals(token) {
   }
 }
 
-export async function postMeal(mealData, token) {
+export async function postComida(mealData, token) {
   try {
     const res = await fetch(`${BASE_URL}/meals`, {
       method: 'POST',

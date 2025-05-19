@@ -8,7 +8,7 @@ export default function NewPurchaseScreen({ navigation }) {
   const [price, setPrice] = useState('');
 
   const handleSave = () => {
-    fetch('http://localhost:192.168.0.122/api/compras', {
+    fetch('https://nutriapp-backend.onrender.com/api/compras', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

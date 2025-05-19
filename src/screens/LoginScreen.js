@@ -1,23 +1,44 @@
 import React, { useState } from 'react';
-import { View, TextInput, Button, Text } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
+import Input from '../components/input';
+import Button from '../components/Button';
+import { loginUser } from '../api/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { fetchUsuarios } from '../api/auth';
+
+
 
 export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [mail, setMail] = useState('');
+  const [contraseña, setContraseña] = useState('');
+  const [error, setError] = useState('');
 
-  const handleLogin = () => {
-    // TODO: call POST /api/auth/login, store token, navigate
-    navigation.replace('Main');
+  const handleLogin = async () => {
+    setError('');
+    const result = await loginUser(mail, contraseña);
+    if (result?.token) {
+      await AsyncStorage.setItem('userToken', result.token);
+      navigation.replace('Dashboard');
+    } else {
+      setError('Credenciales inválidas');
+    }
   };
 
   return (
-    <View style={{ flex: 1, justifyContent: 'center', padding: 16 }}>
-      <Text>Email</Text>
-      <TextInput value={email} onChangeText={setEmail} style={{ borderWidth: 1, marginBottom: 12 }} />
-      <Text>Password</Text>
-      <TextInput secureTextEntry value={password} onChangeText={setPassword} style={{ borderWidth: 1, marginBottom: 12 }} />
-      <Button title="Login" onPress={handleLogin} />
-      <Button title="Register" onPress={() => navigation.navigate('Register')} />
+    <View style={styles.container}>
+      <Text style={styles.title}>¡Bienvenido!</Text>
+      <Input placeholder="Correo electrónico" value={mail} onChangeText={setMail} keyboardType="email-address" />
+      <Input placeholder="Contraseña" value={contraseña} onChangeText={setContraseña} secureTextEntry />
+      {error ? <Text style={styles.error}>{error}</Text> : null}
+      <Button text="Ingresar" onPress={handleLogin} />
+      <Button text="Crear cuenta" type="outline" onPress={() => navigation.navigate('Register')} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: 'center', padding: 20 },
+  title:     { fontSize: 28, fontWeight: 'bold', marginBottom: 24, textAlign: 'center' },
+  error:     { color: 'red', marginVertical: 8, textAlign: 'center' },
+});
+

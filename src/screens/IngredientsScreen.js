@@ -7,7 +7,7 @@ export default function IngredientsScreen({ navigation }) {
   const [ingredients, setIngredients] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:192.168.0.122/api/ingredientes')
+    fetch('https://nutriapp-backend.onrender.com/api/ingredientes')
       .then(res => res.json())
       .then(setIngredients)
       .catch(console.error);

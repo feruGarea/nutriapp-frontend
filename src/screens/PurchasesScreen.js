@@ -5,7 +5,7 @@ export default function PurchasesScreen({ navigation }) {
   const [purchases, setPurchases] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:192.168.0.122/api/compras')
+    fetch('https://nutriapp-backend.onrender.com/api/compras')
       .then(res => res.json())
       .then(setPurchases)
       .catch(console.error);

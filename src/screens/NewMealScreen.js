@@ -1,13 +1,14 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Text } from 'react-native';
 
+
 export default function NewMealScreen({ navigation }) {
   const [dayId, setDayId] = useState('1');
   const [name, setName] = useState('');
   const [type, setType] = useState('almuerzo');
 
   const handleSave = () => {
-    fetch('http://localhost:192.168.0.122/api/comidas', {
+    fetch('https://nutriapp-backend.onrender.com/api/comidas', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id_dia: parseInt(dayId,10), nombre: name, tipo_comida: type })

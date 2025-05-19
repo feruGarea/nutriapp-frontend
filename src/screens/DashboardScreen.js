@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import { fetchUsuarios } from '../utils/api';
-import { loginUser, registerUser } from '../api/auth';
+import { fetchUsuarios } from '../api/auth';
+
 
 
 export default function DashboardScreen() {
@@ -9,7 +9,7 @@ export default function DashboardScreen() {
   const [usuarios, setUsuarios] = useState([]);
 
   useEffect(() => {
-    fetch('http://localhost:192.168.0.122/api/reports/daily?date=2025-05-14')
+    fetch('https://nutriapp-backend.onrender.com/api/reports/daily?date=2025-05-14')
       .then(res => res.json())
       .then(setReport)
       .catch(console.error);

@@ -6,7 +6,7 @@ export default function NewIngredientScreen({ navigation }) {
   const [med, setMed] = useState('gr');
 
   const handleSave = () => {
-    fetch('http://localhost:192.168.0.122/api/ingredientes', {
+    fetch('https://nutriapp-backend.onrender.com/api/ingredientes', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ nombre_ing: name, medicion: med })
