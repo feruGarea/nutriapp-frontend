@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList, Button } from 'react-native';
+import { loginUser, registerUser } from '../api/auth';
+
 
 export default function IngredientsScreen({ navigation }) {
   const [ingredients, setIngredients] = useState([]);
