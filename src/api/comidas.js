@@ -1,4 +1,4 @@
-const BASE_URL = 'https://nutriapp-backend-vou4.onrender.com/api/comidas';
+const BASE_URL = 'https://nutriapp-backend.onrender.com/api/comidas';
 
 
 export async function getComidas(token) {

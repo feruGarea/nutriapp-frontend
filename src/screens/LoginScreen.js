@@ -18,7 +18,7 @@ export default function LoginScreen({ navigation }) {
     const result = await loginUser(mail, contraseña);
     if (result?.token) {
       await AsyncStorage.setItem('userToken', result.token);
-      navigation.replace('Dashboard');
+      navigation.replace('Main');
     } else {
       setError('Credenciales inválidas');
     }

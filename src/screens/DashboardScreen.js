@@ -1,6 +1,38 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
 import { fetchUsuarios } from '../api/auth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+const [report, setReport] = useState([]);
+
+
+useEffect(() => {
+  const fetchReport = async () => {
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+      const res = await fetch(
+        'https://nutriapp-backend.onrender.com/api/reports/daily?date=2025-05-14',
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const contentType = res.headers.get('content-type');
+      if (res.ok && contentType?.includes('application/json')) {
+        const data = await res.json();
+        setReport(data);
+      } else {
+        const text = await res.text();
+        console.warn('⚠️ Respuesta no JSON:', text);
+      }
+    } catch (err) {
+      console.error('❌ Error al cargar reporte:', err);
+    }
+  };
+
+  fetchReport();
+}, []);
 
 
 
@@ -8,16 +40,7 @@ export default function DashboardScreen() {
   const [report, setReport] = useState([]);
   const [usuarios, setUsuarios] = useState([]);
 
-  useEffect(() => {
-    fetch('https://nutriapp-backend.onrender.com/api/reports/daily?date=2025-05-14')
-      .then(res => res.json())
-      .then(setReport)
-      .catch(console.error);
-  }, []);
-
-  useEffect(() => {
-    fetchUsuarios().then(setUsuarios).catch(console.error);
-  }, []);
+  
 
   return (
     
