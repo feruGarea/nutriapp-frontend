@@ -14,7 +14,7 @@ const handleRegister = async () => {
 
   if (result?.token) {
     await AsyncStorage.setItem('userToken', result.token);
-    navigation.replace('Main');
+    navigation.replace('Login');
   } else {
     alert('Registro fallido');
   }
