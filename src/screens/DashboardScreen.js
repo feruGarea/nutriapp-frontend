@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, FlatList } from 'react-native';
-import { fetchUsuarios } from '../api/auth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-const [report, setReport] = useState([]);
+import { fetchUsuarios } from '../api/auth';
+
+export default function DashboardScreen() {
+  const [report, setReport] = useState([]);      
+  const [usuarios, setUsuarios] = useState([]);
+
 
 
 useEffect(() => {
